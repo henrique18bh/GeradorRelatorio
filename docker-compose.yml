@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  liquibase:
+    image: anima.azurecr.io/liquibase
+    command: liquibase --defaultsFile=/var/changelog/liquibase.properties --url="jdbc:postgresql://db:5432/servico-negociacao" --username=postgres --password="Postgres2019!" update
+    working_dir: /var
+    volumes:
+      - ./database/changelog:/var/changelog
+    links:
+      - db
+    networks:
+      - servico-negociacao-network
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "Postgres2019!"
+      POSTGRES_DB: "servico-negociacao"
+    ports:
+      - "15432:5432"
+    networks:
+      - servico-negociacao-network
+
+networks: 
+  servico-negociacao-network:
+    driver: bridge
