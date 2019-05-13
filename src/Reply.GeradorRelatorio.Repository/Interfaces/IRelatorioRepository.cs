@@ -8,6 +8,6 @@ namespace Reply.GeradorRelatorio.Repository.Interfaces
 {
     public interface IRelatorioRepository
     {
-
+        void ObterDadosTxt(string caminhoTxt, string caminhoResultado);
     }
 }

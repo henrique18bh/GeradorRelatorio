@@ -41,8 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CarregarDadosService.cs" />
-    <Compile Include="Interfaces\ICarregarDadosService.cs" />
+    <Compile Include="CarregaDadosService.cs" />
+    <Compile Include="Interfaces\ICarregaDadosService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
