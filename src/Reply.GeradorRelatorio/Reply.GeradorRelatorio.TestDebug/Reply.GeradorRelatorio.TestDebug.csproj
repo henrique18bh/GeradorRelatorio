@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D547AAE3-15BE-4B08-91B5-0EC82143DC5B}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Reply.GeradorRelatorio.Repository</RootNamespace>
-    <AssemblyName>Reply.GeradorRelatorio.Repository</AssemblyName>
+    <ProjectGuid>{884BEB17-E162-41F8-86A5-124E38844D25}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Reply.GeradorRelatorio.TestDebug</RootNamespace>
+    <AssemblyName>Reply.GeradorRelatorio.TestDebug</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,15 +43,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Reply.GeradorRelatorio\Reply.GeradorRelatorio.Entity\Reply.GeradorRelatorio.Entity.csproj">
+    <ProjectReference Include="..\..\Reply.GeradorRelatorio.Repository\Reply.GeradorRelatorio.Repository.csproj">
+      <Project>{d547aae3-15be-4b08-91b5-0ec82143dc5b}</Project>
+      <Name>Reply.GeradorRelatorio.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reply.GeradorRelatorio.Entity\Reply.GeradorRelatorio.Entity.csproj">
       <Project>{ad71de5e-43bc-4818-8cad-8415cecd4144}</Project>
       <Name>Reply.GeradorRelatorio.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reply.GeradorRelatorio.Service\Reply.GeradorRelatorio.Service.csproj">
+      <Project>{55c14948-f696-4c67-b026-437963f674e3}</Project>
+      <Name>Reply.GeradorRelatorio.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

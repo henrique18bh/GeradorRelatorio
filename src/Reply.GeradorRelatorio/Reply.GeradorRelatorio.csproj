@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SimpleInjector, Version=4.6.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>packages\SimpleInjector.4.6.0\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
@@ -63,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GeradorRelatorioService.resx">
@@ -74,6 +78,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Config\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Reply.GeradorRelatorio.Entity\Reply.GeradorRelatorio.Entity.csproj">
+      <Project>{ad71de5e-43bc-4818-8cad-8415cecd4144}</Project>
+      <Name>Reply.GeradorRelatorio.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="Reply.GeradorRelatorio.Service\Reply.GeradorRelatorio.Service.csproj">
+      <Project>{55c14948-f696-4c67-b026-437963f674e3}</Project>
+      <Name>Reply.GeradorRelatorio.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
