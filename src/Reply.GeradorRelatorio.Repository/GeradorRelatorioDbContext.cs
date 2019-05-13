@@ -8,5 +8,9 @@ namespace Reply.GeradorRelatorio.Repository
 {
     public class GeradorRelatorioDbContext
     {
+        public void RealizarConsulta(string caminhoTxt, string caminhoResultado)
+        {
+
+        }
     }
 }
