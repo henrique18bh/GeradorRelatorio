@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,10 +24,64 @@ namespace Reply.GeradorRelatorio.Repository
 
         public void ObterDadosTxt(string caminhoTxt, string caminhoResultado)
         {
-            if(File.Exists(caminhoTxt))
+            try
             {
-              var listaConsultas = File.ReadAllLines(caminhoTxt);
-               
+                if (File.Exists(caminhoTxt))
+                {
+                    var listaConsultas = File.ReadAllLines(caminhoTxt);
+
+
+                    var connectionString = "";
+                    using (SqlConnection connection =  new SqlConnection(connectionString))
+                    {
+                        foreach (var item in listaConsultas)
+                        {
+                            SqlCommand command = new SqlCommand(item, connection);
+
+                            try
+                            {
+                                connection.Open();
+                                using (SqlDataReader dataReader = command.ExecuteReader())
+                                {
+                                    var listaResultado = new StringBuilder();
+
+                                    var columnNames = Enumerable.Range(0, dataReader.FieldCount)
+                                                   .Select(dataReader.GetName)
+                                                   .ToList();
+
+                                    //Create headers
+                                    listaResultado.Append(string.Join(",", columnNames));
+
+                                    //Append Line
+                                    listaResultado.AppendLine();
+
+                                    while (dataReader.Read())
+                                    {
+                                        for (int i = 0; i < dataReader.FieldCount; i++)
+                                        {
+                                            string value = dataReader[i].ToString();
+                                            if (value.Contains(","))
+                                                value = "\"" + value + "\"";
+
+                                            listaResultado.Append(value.Replace(Environment.NewLine, " ") + ",");
+                                        }
+                                        listaResultado.Length--;
+                                        listaResultado.AppendLine();
+                                    }
+                                    File.WriteAllText(caminhoResultado, listaResultado.ToString());
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }
