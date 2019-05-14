@@ -28,20 +28,23 @@ namespace Reply.GeradorRelatorio.Service
 
         public void GerarRelatorio()
         {
-            // Chamar o service de configuração e obter o objeto
-            // fazer a validação se ta dentro da data / hora estipulada no arquivo
-
             var dados = _configuracaoService.ObterDadosConfiguracao();
-            string caminhoTxt = @"C:\Henrique\Projetos\GeradorRelatorio\static\query.txt";
-            string caminhoRetorno = @"C:\Henrique\Projetos\GeradorRelatorio\static";
-            var queries = ObterQueries(caminhoTxt);
+
+            DateTime dataValidacao = Convert.ToDateTime(dados.Data);
             
-            // apagar o arquivo com as queries .txt
+            if(!dataValidacao.Date.Equals(DateTime.Now.Date))
+            {
+                return;
+            }
+
+            var queries = ObterQueries(dados.CaminhoTxt);
+
+            File.Delete(dados.CaminhoTxt);
 
             var consultas = _relatorioRepository.ObterRelatorios(queries);
             foreach (var dt in consultas)
             {
-                GerarCsv(dt, caminhoRetorno);
+                GerarCsv(dt, dados.CaminhoResultado);
             }
             _historicoService.Salvar("teste", queries[0]);
             // O serviço Windows deverá gera logs das principais atividades executadas.
