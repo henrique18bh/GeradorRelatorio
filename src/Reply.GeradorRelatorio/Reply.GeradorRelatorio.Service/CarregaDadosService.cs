@@ -16,16 +16,24 @@ namespace Reply.GeradorRelatorio.Service
                 DateTime.Now.ToLongTimeString().Replace(":", "-"));
         public void GerarRelatorio()
         {
+            // Chamar o service de configuração e obter o objeto
+            // fazer a validação se ta dentro da data / hora estipulada no arquivo
+
             string caminhoTxt = @"C:\Henrique\Projetos\GeradorRelatorio\static\query.txt";
             string caminhoRetorno = @"C:\Henrique\Projetos\GeradorRelatorio\static";
             RelatorioRepository reposotorio = new RelatorioRepository();
 
             var queries = ObterQueries(caminhoTxt);
+            
+            // apagar o arquivo com as queries .txt
+
             var consultas = reposotorio.ObterRelatorios(queries);
             foreach (var dt in consultas)
             {
                 GerarCsv(dt, caminhoRetorno);
             }
+            // fazer a chamada do HistoriocoRelatorioRepository para salvar
+            // O serviço Windows deverá gera logs das principais atividades executadas.
         }
 
         public List<string> ObterQueries(string caminhoArquivo)
