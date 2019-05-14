@@ -10,10 +10,10 @@ namespace Reply.GeradorRelatorio.TestDebug
 {
     class Program
     {
-        private static readonly ICarregaDadosService _service = new CarregaDadosService();
+        private static readonly IGeradorRelatorioService _service = new GeradorRelatorioService();
         static void Main(string[] args)
         {
-            var service = new CarregaDadosService();
+            var service = new GeradorRelatorioService();
             service.GerarRelatorio();
         }
     }

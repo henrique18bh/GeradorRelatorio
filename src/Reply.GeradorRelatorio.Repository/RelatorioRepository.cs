@@ -9,7 +9,7 @@ namespace Reply.GeradorRelatorio.Repository
 {
     public class RelatorioRepository : IRelatorioRepository
     {
-        private readonly string _ConnectionString = ConfigurationManager.ConnectionStrings["BancoRelatorio"].ConnectionString;
+        private readonly string _ConnectionString = ConfigurationManager.ConnectionStrings["BancoRelatorioConnectionString"].ConnectionString;
 
         public IList<DataTable> ObterRelatorios(IList<string> queries)
         {

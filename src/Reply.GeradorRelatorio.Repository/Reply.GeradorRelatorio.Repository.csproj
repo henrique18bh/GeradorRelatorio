@@ -50,8 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GeradorRelatorioDbContext.cs" />
-    <Compile Include="HistorioRelatorio.cs" />
-    <Compile Include="Interfaces\IHistorioRelatorio.cs" />
+    <Compile Include="HistoricoRelatorioRepository.cs" />
+    <Compile Include="Interfaces\HistoricoRelatorioRepository.cs" />
     <Compile Include="Interfaces\IRelatorioRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelatorioRepository.cs" />

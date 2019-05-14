@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reply.GeradorRelatorio.Entity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -20,6 +21,6 @@ namespace Reply.GeradorRelatorio.Repository
             //Database.SetInitializer<SchoolDBContext>(new DropCreateDatabaseAlways<SchoolDBContext>());
             //Database.SetInitializer<SchoolDBContext>(new SchoolDBInitializer());
         }
-        public DbSet<HistorioRelatorio> HistorioRelatorios { get; set; }
+        public DbSet<HistoricoRelatorio> HistorioRelatorios { get; set; }
     }
 }

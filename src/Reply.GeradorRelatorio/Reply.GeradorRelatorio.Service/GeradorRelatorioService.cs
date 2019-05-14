@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Reply.GeradorRelatorio.Service
 {
-    public class CarregaDadosService : ICarregaDadosService
+    public class GeradorRelatorioService : IGeradorRelatorioService
     {
         private static readonly string _NomeArquivo = string.Format("Relatorio_{0}.csv",
                 DateTime.Now.ToLongTimeString().Replace(":", "-"));

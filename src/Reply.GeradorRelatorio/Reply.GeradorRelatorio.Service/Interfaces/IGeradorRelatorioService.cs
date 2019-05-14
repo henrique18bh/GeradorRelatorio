@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Reply.GeradorRelatorio.Service.Interfaces
 {
-    public interface ICarregaDadosService
+    public interface IGeradorRelatorioService
     {
+        void GerarRelatorio();
     }
 }
