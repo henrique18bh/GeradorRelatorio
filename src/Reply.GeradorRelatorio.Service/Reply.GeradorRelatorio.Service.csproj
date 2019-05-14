@@ -48,15 +48,14 @@
     <Compile Include="Interfaces\IHistoricoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\Reply.GeradorRelatorio.Repository\Reply.GeradorRelatorio.Repository.csproj">
-      <Project>{d547aae3-15be-4b08-91b5-0ec82143dc5b}</Project>
-      <Name>Reply.GeradorRelatorio.Repository</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Reply.GeradorRelatorio.Entity\Reply.GeradorRelatorio.Entity.csproj">
       <Project>{ad71de5e-43bc-4818-8cad-8415cecd4144}</Project>
       <Name>Reply.GeradorRelatorio.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reply.GeradorRelatorio.Repository\Reply.GeradorRelatorio.Repository.csproj">
+      <Project>{d547aae3-15be-4b08-91b5-0ec82143dc5b}</Project>
+      <Name>Reply.GeradorRelatorio.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

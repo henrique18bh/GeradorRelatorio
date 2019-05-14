@@ -90,11 +90,11 @@
     <Folder Include="Config\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Reply.GeradorRelatorio.Entity\Reply.GeradorRelatorio.Entity.csproj">
+    <ProjectReference Include="..\Reply.GeradorRelatorio.Entity\Reply.GeradorRelatorio.Entity.csproj">
       <Project>{ad71de5e-43bc-4818-8cad-8415cecd4144}</Project>
       <Name>Reply.GeradorRelatorio.Entity</Name>
     </ProjectReference>
-    <ProjectReference Include="Reply.GeradorRelatorio.Service\Reply.GeradorRelatorio.Service.csproj">
+    <ProjectReference Include="..\Reply.GeradorRelatorio.Service\Reply.GeradorRelatorio.Service.csproj">
       <Project>{55c14948-f696-4c67-b026-437963f674e3}</Project>
       <Name>Reply.GeradorRelatorio.Service</Name>
     </ProjectReference>

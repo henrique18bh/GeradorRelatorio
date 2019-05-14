@@ -61,7 +61,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Reply.GeradorRelatorio\Reply.GeradorRelatorio.Entity\Reply.GeradorRelatorio.Entity.csproj">
+    <ProjectReference Include="..\Reply.GeradorRelatorio.Entity\Reply.GeradorRelatorio.Entity.csproj">
       <Project>{ad71de5e-43bc-4818-8cad-8415cecd4144}</Project>
       <Name>Reply.GeradorRelatorio.Entity</Name>
     </ProjectReference>
