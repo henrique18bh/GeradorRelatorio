@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\EntityBase.cs" />
-    <Compile Include="DTO\XmlDadosDTO.cs" />
+    <Compile Include="DTO\DadosConfiguracaoDTO.cs" />
     <Compile Include="HistoricoRelatorio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

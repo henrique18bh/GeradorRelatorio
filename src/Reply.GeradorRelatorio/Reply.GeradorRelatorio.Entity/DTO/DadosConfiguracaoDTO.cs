@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Reply.GeradorRelatorio.Entity.DTO
 {
-    public class XmlDadosDTO
+    public class DadosConfiguracaoDTO
     {
         public string CaminhoTxt { get; set; }
         public string Data { get; set; }

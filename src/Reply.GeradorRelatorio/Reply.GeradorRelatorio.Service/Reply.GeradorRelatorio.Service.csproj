@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CarregaDadosService.cs" />
+    <Compile Include="ConfiguracaoService.cs" />
     <Compile Include="Interfaces\ICarregaDadosService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
