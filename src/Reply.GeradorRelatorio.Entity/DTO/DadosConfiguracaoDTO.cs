@@ -15,10 +15,7 @@ namespace Reply.GeradorRelatorio.Entity.DTO
 
         [XmlElement("Data")]
         public string Data { get; set; }
-
-        [XmlElement("Hora")]
-        public string Hora { get; set; }
-
+        
         [XmlElement("CaminhoResultado")]
         public string CaminhoResultado{ get; set; }
     }

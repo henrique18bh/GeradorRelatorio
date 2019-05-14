@@ -28,11 +28,12 @@ namespace Reply.GeradorRelatorio.Service
 
         public void GerarRelatorio()
         {
+
             var dados = _configuracaoService.ObterDadosConfiguracao();
 
             DateTime dataValidacao = Convert.ToDateTime(dados.Data);
             
-            if(!dataValidacao.Date.Equals(DateTime.Now.Date))
+            if(!dataValidacao.Equals(DateTime.Now))
             {
                 return;
             }

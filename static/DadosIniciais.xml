@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <dados>
   <CaminhoTxt>C:\Users\thale\source\repos\GeradorRelatorio\static\query.txt</CaminhoTxt>
-  <Data>01/10/2019</Data>
-  <Hora>22:00</Hora>
+  <Data>01/10/2019 22:00</Data>
   <CaminhoResultado>C:\Users\thale\source\repos\GeradorRelatorio\static</CaminhoResultado>
 </dados>  
