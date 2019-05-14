@@ -18,11 +18,12 @@ namespace Reply.GeradorRelatorio.Service
 
         private readonly IHistoricoService _historicoService;
         private readonly IRelatorioRepository _relatorioRepository;
-
+        private readonly IConfiguracaoService _configuracaoService;
         public GeradorRelatorioService()
         {
             _historicoService = new HistoricoService();
             _relatorioRepository = new RelatorioRepository();
+            _configuracaoService = new ConfiguracaoService();
         }
 
         public void GerarRelatorio()
@@ -30,6 +31,7 @@ namespace Reply.GeradorRelatorio.Service
             // Chamar o service de configuração e obter o objeto
             // fazer a validação se ta dentro da data / hora estipulada no arquivo
 
+            var dados = _configuracaoService.ObterDadosConfiguracao();
             string caminhoTxt = @"C:\Henrique\Projetos\GeradorRelatorio\static\query.txt";
             string caminhoRetorno = @"C:\Henrique\Projetos\GeradorRelatorio\static";
             var queries = ObterQueries(caminhoTxt);

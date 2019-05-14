@@ -45,6 +45,7 @@
     <Compile Include="ConfiguracaoService.cs" />
     <Compile Include="HistoricoService.cs" />
     <Compile Include="Interfaces\IGeradorRelatorioService.cs" />
+    <Compile Include="Interfaces\IConfiguracaoService.cs" />
     <Compile Include="Interfaces\IHistoricoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -57,6 +58,9 @@
       <Project>{d547aae3-15be-4b08-91b5-0ec82143dc5b}</Project>
       <Name>Reply.GeradorRelatorio.Repository</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DadosIniciais.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
