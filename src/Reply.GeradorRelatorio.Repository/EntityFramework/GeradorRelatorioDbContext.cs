@@ -13,13 +13,12 @@ namespace Reply.GeradorRelatorio.Repository.EntityFramework
 {
     public class GeradorRelatorioDbContext : DbContext
     {
-        public GeradorRelatorioDbContext() : base("GeradorRelatorioDbConnectionString")
+        public GeradorRelatorioDbContext() : base("name=GeradorRelatorioDbConnectionString")
         {
             Database.SetInitializer(new CreateDatabaseIfNotExists<GeradorRelatorioDbContext>());
 
-            //Database.SetInitializer<SchoolDBContext>(new DropCreateDatabaseIfModelChanges<SchoolDBContext>());
-            //Database.SetInitializer<SchoolDBContext>(new DropCreateDatabaseAlways<SchoolDBContext>());
-            //Database.SetInitializer<SchoolDBContext>(new SchoolDBInitializer());
+            //Database.SetInitializer<GeradorRelatorioDbContext>(new DropCreateDatabaseIfModelChanges<GeradorRelatorioDbContext>());
+            //Database.SetInitializer<GeradorRelatorioDbContext>(new DropCreateDatabaseAlways<GeradorRelatorioDbContext>());
         }
         public DbSet<HistoricoRelatorio> HistorioRelatorios { get; set; }
     }
