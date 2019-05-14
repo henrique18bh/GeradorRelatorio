@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="GeradorRelatorioService.cs" />
     <Compile Include="ConfiguracaoService.cs" />
+    <Compile Include="HistoricoService.cs" />
     <Compile Include="Interfaces\IGeradorRelatorioService.cs" />
+    <Compile Include="Interfaces\IHistoricoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

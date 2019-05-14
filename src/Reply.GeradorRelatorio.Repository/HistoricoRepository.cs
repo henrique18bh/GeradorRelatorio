@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Reply.GeradorRelatorio.Repository
 {
-    public class HistoricoRelatorioRepository : Interfaces.HistoricoRelatorioRepository
+    public class HistoricoRepository : Interfaces.IHistoricoRepository
     {
         public void Salvar(HistoricoRelatorio historico)
         {

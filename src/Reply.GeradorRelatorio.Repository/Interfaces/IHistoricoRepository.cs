@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Reply.GeradorRelatorio.Repository.Interfaces
 {
-    public interface HistoricoRelatorioRepository
+    public interface IHistoricoRepository
     {
         void Salvar(HistoricoRelatorio historico);
     }

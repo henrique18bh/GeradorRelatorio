@@ -1,4 +1,5 @@
 ﻿using Reply.GeradorRelatorio.Repository;
+using Reply.GeradorRelatorio.Repository.Interfaces;
 using Reply.GeradorRelatorio.Service.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,16 @@ namespace Reply.GeradorRelatorio.Service
     {
         private static readonly string _NomeArquivo = string.Format("Relatorio_{0}.csv",
                 DateTime.Now.ToLongTimeString().Replace(":", "-"));
+
+        private readonly IHistoricoService _historicoService;
+        private readonly IRelatorioRepository _relatorioRepository;
+
+        public GeradorRelatorioService()
+        {
+            _historicoService = new HistoricoService();
+            _relatorioRepository = new RelatorioRepository();
+        }
+
         public void GerarRelatorio()
         {
             // Chamar o service de configuração e obter o objeto
@@ -21,18 +32,16 @@ namespace Reply.GeradorRelatorio.Service
 
             string caminhoTxt = @"C:\Henrique\Projetos\GeradorRelatorio\static\query.txt";
             string caminhoRetorno = @"C:\Henrique\Projetos\GeradorRelatorio\static";
-            RelatorioRepository reposotorio = new RelatorioRepository();
-
             var queries = ObterQueries(caminhoTxt);
             
             // apagar o arquivo com as queries .txt
 
-            var consultas = reposotorio.ObterRelatorios(queries);
+            var consultas = _relatorioRepository.ObterRelatorios(queries);
             foreach (var dt in consultas)
             {
                 GerarCsv(dt, caminhoRetorno);
             }
-            // fazer a chamada do HistoriocoRelatorioRepository para salvar
+            _historicoService.Salvar("teste", queries[0]);
             // O serviço Windows deverá gera logs das principais atividades executadas.
         }
 
