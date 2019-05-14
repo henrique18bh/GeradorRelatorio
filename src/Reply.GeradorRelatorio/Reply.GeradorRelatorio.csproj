@@ -86,9 +86,7 @@
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Config\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Reply.GeradorRelatorio.Entity\Reply.GeradorRelatorio.Entity.csproj">
       <Project>{ad71de5e-43bc-4818-8cad-8415cecd4144}</Project>
