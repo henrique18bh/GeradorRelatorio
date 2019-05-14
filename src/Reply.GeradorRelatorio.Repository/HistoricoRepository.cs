@@ -1,4 +1,5 @@
 ﻿using Reply.GeradorRelatorio.Entity;
+using Reply.GeradorRelatorio.Repository.EntityFramework;
 using Reply.GeradorRelatorio.Repository.Interfaces;
 using System;
 using System.Collections.Generic;

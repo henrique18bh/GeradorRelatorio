@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GeradorRelatorioDbContext.cs" />
+    <Compile Include="EntityFramework\GeradorRelatorioDbContext.cs" />
     <Compile Include="HistoricoRepository.cs" />
     <Compile Include="Interfaces\IHistoricoRepository.cs" />
     <Compile Include="Interfaces\IRelatorioRepository.cs" />

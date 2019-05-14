@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reply.GeradorRelatorio.Repository
+namespace Reply.GeradorRelatorio.Repository.EntityFramework
 {
     public class GeradorRelatorioDbContext : DbContext
     {
