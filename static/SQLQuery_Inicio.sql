@@ -4,12 +4,12 @@ GO
 USE BaseExemplo
 GO
 
-CREATE TABLE dbo.HistorioRelatorios(
-	Id  int Identity,
-	Nome varchar(30) NOT NULL,
-	DataGeracao datetime NOT NULL,
-	ConsultaRealizada varchar(2000) NOT NULL,
-	CONSTRAINT PK_HistorioRelatorios PRIMARY KEY (Id)
+CREATE TABLE dbo.Cotacoes(
+	Sigla char(3) NOT NULL,
+	NomeMoeda varchar(30) NOT NULL,
+	UltimaCotacao datetime NOT NULL,
+	Valor numeric (18,4) NOT NULL,
+	CONSTRAINT PK_Cotacoes PRIMARY KEY (Sigla)
 )
 GO
 
