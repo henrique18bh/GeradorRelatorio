@@ -13,11 +13,11 @@ namespace Reply.GeradorRelatorio.Repository
     {
         public void Salvar(HistoricoRelatorio historico)
         {
-            //using (var ctx = new GeradorRelatorioDbContext())
-            //{
-            //    ctx.HistorioRelatorios.Add(historico);
-            //    ctx.SaveChanges();
-            //}
+            using (var ctx = new GeradorRelatorioDbContext())
+            {
+                ctx.HistorioRelatorios.Add(historico);
+                ctx.SaveChanges();
+            }
         }
     }
 }

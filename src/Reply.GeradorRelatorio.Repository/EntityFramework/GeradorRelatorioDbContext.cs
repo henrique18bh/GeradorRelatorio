@@ -11,15 +11,15 @@ using System.Threading.Tasks;
 
 namespace Reply.GeradorRelatorio.Repository.EntityFramework
 {
-    public class GeradorRelatorioDbContext
+    public class GeradorRelatorioDbContext : DbContext
     {
-        //public GeradorRelatorioDbContext() : base("name=GeradorRelatorioDbConnectionString")
-        //{
-        //    Database.SetInitializer(new CreateDatabaseIfNotExists<GeradorRelatorioDbContext>());
+        public GeradorRelatorioDbContext() : base("name=GeradorRelatorioDbConnectionString")
+        {
+            Database.SetInitializer(new CreateDatabaseIfNotExists<GeradorRelatorioDbContext>());
 
-        //    //Database.SetInitializer<GeradorRelatorioDbContext>(new DropCreateDatabaseIfModelChanges<GeradorRelatorioDbContext>());
-        //    //Database.SetInitializer<GeradorRelatorioDbContext>(new DropCreateDatabaseAlways<GeradorRelatorioDbContext>());
-        //}
-        //public DbSet<HistoricoRelatorio> HistorioRelatorios { get; set; }
+            //Database.SetInitializer<GeradorRelatorioDbContext>(new DropCreateDatabaseIfModelChanges<GeradorRelatorioDbContext>());
+            //Database.SetInitializer<GeradorRelatorioDbContext>(new DropCreateDatabaseAlways<GeradorRelatorioDbContext>());
+        }
+        public DbSet<HistoricoRelatorio> HistorioRelatorios { get; set; }
     }
 }
