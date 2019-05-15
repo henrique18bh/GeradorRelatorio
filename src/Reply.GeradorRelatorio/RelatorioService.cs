@@ -4,10 +4,14 @@ using System.Timers;
 using System.Runtime.InteropServices;
 using System.Configuration;
 using System;
+using Reply.GeradorRelatorio.Service.Interfaces;
+using Reply.GeradorRelatorio.Service;
+using log4net;
+using log4net.Config;
 
 namespace Reply.GeradorRelatorio
 {
-    public partial class GeradorRelatorioService : ServiceBase
+    public partial class RelatorioService : ServiceBase
     {
         private int eventId = 1;
 
@@ -33,18 +37,21 @@ namespace Reply.GeradorRelatorio
             public int dwCheckPoint;
             public int dwWaitHint;
         };
+        private readonly IGeradorRelatorioService _geradorRelatorioService;
+        private static readonly ILog log = LogManager.GetLogger("Service de relatórios");
 
-        public GeradorRelatorioService()
+        public RelatorioService()
         {
+            _geradorRelatorioService = new GeradorRelatorioService();
             InitializeComponent();
             eventLog1 = new System.Diagnostics.EventLog();
-            if (!System.Diagnostics.EventLog.SourceExists("MySource"))
+            if (!System.Diagnostics.EventLog.SourceExists("RelatorioService"))
             {
                 System.Diagnostics.EventLog.CreateEventSource(
-                    "MySource", "MyNewLog");
+                    "RelatorioService", "RelatorioServiceNewLog");
             }
-            eventLog1.Source = "MySource";
-            eventLog1.Log = "MyNewLog";
+            eventLog1.Source = "RelatorioService";
+            eventLog1.Log = "RelatorioServiceNewLog";
         }
 
         protected override void OnStart(string[] args)
@@ -55,7 +62,9 @@ namespace Reply.GeradorRelatorio
             serviceStatus.dwWaitHint = 100000;
             SetServiceStatus(this.ServiceHandle, ref serviceStatus);
 
-            eventLog1.WriteEntry("In OnStart.");
+            XmlConfigurator.Configure();
+            eventLog1.WriteEntry("Start do serviço.");
+            log.Info("Start do serviço.");
             Timer timer = new Timer();
             timer.Interval = Convert.ToDouble(ConfigurationManager.AppSettings["intervaloExecucao"]);
             timer.Elapsed += new ElapsedEventHandler(this.OnTimer);
@@ -68,13 +77,16 @@ namespace Reply.GeradorRelatorio
 
         public void OnTimer(object sender, ElapsedEventArgs args)
         {
-            // TODO: Insert monitoring activities here.
-            eventLog1.WriteEntry("Monitoring the System", EventLogEntryType.Information, eventId++);
+            eventLog1.WriteEntry("Início da execução do serviço.", EventLogEntryType.Information, eventId++);
+            log.Info("Início da execução do serviço.");
+            _geradorRelatorioService.GerarRelatorio();
+            log.Info("Fim da execução do serviço.");
         }
 
         protected override void OnStop()
         {
-            eventLog1.WriteEntry("In OnStop.");
+            eventLog1.WriteEntry("Stop do serviço.");
+            log.Info("Stop do serviço.");
         }
 
         [DllImport("advapi32.dll", SetLastError = true)]

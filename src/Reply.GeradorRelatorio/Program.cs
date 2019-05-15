@@ -17,7 +17,7 @@ namespace Reply.GeradorRelatorio
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new GeradorRelatorioService()
+                new RelatorioService()
             };
             ServiceBase.Run(ServicesToRun);
         }

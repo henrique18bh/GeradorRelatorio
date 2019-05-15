@@ -60,11 +60,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GeradorRelatorioService.cs">
+    <Compile Include="RelatorioService.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="GeradorRelatorioService.Designer.cs">
-      <DependentUpon>GeradorRelatorioService.cs</DependentUpon>
+    <Compile Include="RelatorioService.Designer.cs">
+      <DependentUpon>RelatorioService.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="ProjectInstaller.cs">
@@ -80,8 +80,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="GeradorRelatorioService.resx">
-      <DependentUpon>GeradorRelatorioService.cs</DependentUpon>
+    <EmbeddedResource Include="RelatorioService.resx">
+      <DependentUpon>RelatorioService.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProjectInstaller.resx">
       <DependentUpon>ProjectInstaller.cs</DependentUpon>

@@ -1,6 +1,6 @@
 ﻿namespace Reply.GeradorRelatorio
 {
-    partial class GeradorRelatorioService
+    partial class RelatorioService
     {
         /// <summary> 
         /// Required designer variable.
