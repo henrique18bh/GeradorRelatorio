@@ -1,7 +1,9 @@
-﻿using Reply.GeradorRelatorio.Entity.DTO;
+﻿using log4net;
+using Reply.GeradorRelatorio.Entity.DTO;
 using Reply.GeradorRelatorio.Service.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,16 +16,24 @@ namespace Reply.GeradorRelatorio.Service
 {
     public class ConfiguracaoService : IConfiguracaoService
     {
+        private static readonly ILog log = LogManager.GetLogger("Service de relatórios");
         public DadosConfiguracaoDTO ObterDadosConfiguracao()
         {
-            var dados = new DadosConfiguracaoDTO();
-            XmlSerializer serializer = new XmlSerializer(typeof(DadosConfiguracaoDTO));
-            using (FileStream fileStream = new FileStream(@"C:\Henrique\Projetos\GeradorRelatorio\static\DadosIniciais.xml", FileMode.Open))
+            try
             {
-                dados = (DadosConfiguracaoDTO)serializer.Deserialize(fileStream);
+                var dados = new DadosConfiguracaoDTO();
+                XmlSerializer serializer = new XmlSerializer(typeof(DadosConfiguracaoDTO));
+                using (FileStream fileStream = new FileStream(ConfigurationManager.AppSettings["caminhoXML"], FileMode.Open))
+                {
+                    dados = (DadosConfiguracaoDTO)serializer.Deserialize(fileStream);
+                }
+                return dados;
             }
-            return dados;
-
+            catch (Exception)
+            {
+                log.Error("Erro ao obterDados de configuração XML");
+            }
+            return null;
         }
     }
 }

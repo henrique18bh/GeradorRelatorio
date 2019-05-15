@@ -32,24 +32,51 @@ namespace Reply.GeradorRelatorio.Service
         {
             log.Info("Obtendo Dados de configuração");
 
+
             var dados = _configuracaoService.ObterDadosConfiguracao();
 
+            if (dados == null)
+            {
+                return;
+            }
             DateTime dataValidacao = Convert.ToDateTime(dados.Data);
             var diferencaData = DateTime.Compare(dataValidacao, DateTime.Now);
             if (diferencaData >= 0)
             {
+                log.Info("Fora do Horário de Execução");
                 return;
             }
 
-            var queries = ObterQueries(dados.CaminhoTxt);  
+            log.Info("Obtendo Queries do Arquivo TXT");
 
+            var queries = ObterQueries(dados.CaminhoTxt);
+            if (queries.Count == 0)
+            {
+                return;
+            }
+
+            log.Info("Obtendo Retorno Consulta SQL");
             var consultas = _relatorioRepository.ObterRelatorios(queries);
 
             for (int i = 0; i < consultas.Count; i++)
             {
-               var nomeArquivo = GerarCsv(consultas[i], dados.CaminhoResultado);
-                _historicoService.Salvar(nomeArquivo, queries[i]);
+
+                log.Info("Gravando Arquivo CSV retorno da Consulta");
+                var nomeArquivo = GerarCsv(consultas[i], dados.CaminhoResultado);
+                try
+                {
+
+                    log.Info("Gerando Banco de Dados o LOG da geração da consulta");
+                    _historicoService.Salvar(nomeArquivo, queries[i]);
+
+                }
+                catch (Exception ex)
+                {
+                    log.Error("Erro ao Salvar Log no Banco de Dados", ex);
+                }
             }
+
+            log.Info("Deletando Arquivo Txt para não executar novamente a consulta");
 
             //File.Delete(dados.CaminhoTxt);
         }
@@ -65,32 +92,43 @@ namespace Reply.GeradorRelatorio.Service
                     retorno.Add(linha);
                 }
             }
+            else
+            {
+                log.Error("Arquivo TXT sem Queries para executar.");
+            }
 
             return retorno;
         }
 
         private string GerarCsv(DataTable dt, string caminhoArquivo)
         {
-            
-            StringBuilder listaResultado = new StringBuilder();
-
-            string[] columnNames = dt.Columns.Cast<DataColumn>()
-                                .Select(column => column.ColumnName)
-                                .ToArray();
-
-            //Create headers
-            listaResultado.AppendLine(string.Join(";", columnNames));
-
-            //Append Line
-            foreach (DataRow row in dt.Rows)
+            try
             {
-                string[] fields = row.ItemArray.Select(field => field.ToString()).
-                                                ToArray();
-                listaResultado.AppendLine(string.Join(";", fields));
+
+                StringBuilder listaResultado = new StringBuilder();
+
+                string[] columnNames = dt.Columns.Cast<DataColumn>()
+                                    .Select(column => column.ColumnName)
+                                    .ToArray();
+
+                //Create headers
+                listaResultado.AppendLine(string.Join(";", columnNames));
+
+                //Append Line
+                foreach (DataRow row in dt.Rows)
+                {
+                    string[] fields = row.ItemArray.Select(field => field.ToString()).
+                                                    ToArray();
+                    listaResultado.AppendLine(string.Join(";", fields));
+                }
+
+                string caminhoArquivoFull = Path.Combine(caminhoArquivo, _NomeArquivo);
+                File.WriteAllText(caminhoArquivoFull, listaResultado.ToString());
             }
-            
-            string caminhoArquivoFull = Path.Combine(caminhoArquivo, _NomeArquivo);
-            File.WriteAllText(caminhoArquivoFull, listaResultado.ToString());
+            catch (Exception ex)
+            {
+                log.Error(string.Format("Erro ao gerar arquivo CSV {0}", _NomeArquivo), ex);
+            }
             return _NomeArquivo;
         }
     }
