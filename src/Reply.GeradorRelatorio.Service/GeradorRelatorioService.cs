@@ -43,15 +43,15 @@ namespace Reply.GeradorRelatorio.Service
 
             var queries = ObterQueries(dados.CaminhoTxt);  
 
-            File.Delete(dados.CaminhoTxt);
-
             var consultas = _relatorioRepository.ObterRelatorios(queries);
-            foreach (var dt in consultas)
+
+            for (int i = 0; i < consultas.Count; i++)
             {
-                GerarCsv(dt, dados.CaminhoResultado);
+               var nomeArquivo = GerarCsv(consultas[i], dados.CaminhoResultado);
+                _historicoService.Salvar(nomeArquivo, queries[i]);
             }
-            _historicoService.Salvar("teste", queries[0]);
-            // O serviço Windows deverá gera logs das principais atividades executadas.
+
+            //File.Delete(dados.CaminhoTxt);
         }
 
         public List<string> ObterQueries(string caminhoArquivo)
@@ -69,8 +69,9 @@ namespace Reply.GeradorRelatorio.Service
             return retorno;
         }
 
-        private void GerarCsv(DataTable dt, string caminhoArquivo)
+        private string GerarCsv(DataTable dt, string caminhoArquivo)
         {
+            
             StringBuilder listaResultado = new StringBuilder();
 
             string[] columnNames = dt.Columns.Cast<DataColumn>()
@@ -87,9 +88,10 @@ namespace Reply.GeradorRelatorio.Service
                                                 ToArray();
                 listaResultado.AppendLine(string.Join(";", fields));
             }
-
+            
             string caminhoArquivoFull = Path.Combine(caminhoArquivo, _NomeArquivo);
             File.WriteAllText(caminhoArquivoFull, listaResultado.ToString());
+            return _NomeArquivo;
         }
     }
 }
