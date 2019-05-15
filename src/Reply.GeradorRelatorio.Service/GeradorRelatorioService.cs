@@ -38,6 +38,12 @@ namespace Reply.GeradorRelatorio.Service
                 {
                     return;
                 }
+
+                if(string.IsNullOrWhiteSpace(dados.Data))
+                {
+                    log.Info("Campo Data vazio no XML de configuração");
+                    return;
+                }
                 DateTime dataValidacao = Convert.ToDateTime(dados.Data);
                 int diferencaData = DateTime.Compare(dataValidacao, DateTime.Now);
                 if (diferencaData >= 0)
@@ -83,6 +89,9 @@ namespace Reply.GeradorRelatorio.Service
                 log.Info("Deletando Arquivo Txt para não gerar novamente os relatórios");
 
                 File.Delete(dados.CaminhoTxt);
+
+                dados.Data = string.Empty;
+                _configuracaoService.AtualizarDadosConfiguracao(dados);
             }
             catch (Exception ex)
             {

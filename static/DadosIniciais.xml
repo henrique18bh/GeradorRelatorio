@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<dados>
+<?xml version="1.0"?>
+<dados xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <CaminhoTxt>C:\Users\thale\source\repos\GeradorRelatorio\static\query.txt</CaminhoTxt>
-  <Data>14/05/2019 23:55</Data>
+  <Data />
   <CaminhoResultado>C:\Users\thale\source\repos\GeradorRelatorio\static</CaminhoResultado>
-</dados>  
+</dados>

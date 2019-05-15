@@ -29,11 +29,18 @@ namespace Reply.GeradorRelatorio.Service
                 }
                 return dados;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                log.Error("Erro ao obterDados de configuração XML");
+                log.Error("Erro ao obterDados de configuração XML", ex);
             }
             return null;
+        }
+
+        public void AtualizarDadosConfiguracao(DadosConfiguracaoDTO dados)
+        {
+            FileStream stream = new FileStream(ConfigurationManager.AppSettings["caminhoXML"], FileMode.Create);
+            XmlSerializer serializer = new XmlSerializer(dados.GetType());
+            serializer.Serialize(stream, dados);
         }
     }
 }

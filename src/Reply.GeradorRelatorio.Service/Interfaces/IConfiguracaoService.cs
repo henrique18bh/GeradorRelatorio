@@ -10,5 +10,6 @@ namespace Reply.GeradorRelatorio.Service.Interfaces
     interface IConfiguracaoService
     {
         DadosConfiguracaoDTO ObterDadosConfiguracao();
+        void AtualizarDadosConfiguracao(DadosConfiguracaoDTO dados);
     }
 }
