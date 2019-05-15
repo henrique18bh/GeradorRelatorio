@@ -36,6 +36,11 @@ namespace Reply.GeradorRelatorio.Service
             {
                 return;
             }
+            if(string.IsNullOrWhiteSpace(dados.Data))
+            {
+                log.Info("Data não preenchida no XML de configuracação");
+                return;
+            }
             DateTime dataValidacao = Convert.ToDateTime(dados.Data);
             int diferencaData = DateTime.Compare(dataValidacao, DateTime.Now);
             if (diferencaData >= 0)
