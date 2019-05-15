@@ -18,7 +18,7 @@ namespace Reply.GeradorRelatorio.Service
         {
             var dados = new DadosConfiguracaoDTO();
             XmlSerializer serializer = new XmlSerializer(typeof(DadosConfiguracaoDTO));
-            using (FileStream fileStream = new FileStream(@"C:\Users\thale\source\repos\GeradorRelatorio\static\DadosIniciais.xml", FileMode.Open))
+            using (FileStream fileStream = new FileStream(@"C:\Henrique\Projetos\GeradorRelatorio\static\DadosIniciais.xml", FileMode.Open))
             {
                 dados = (DadosConfiguracaoDTO)serializer.Deserialize(fileStream);
             }

@@ -1,4 +1,5 @@
-﻿using Reply.GeradorRelatorio.Repository;
+﻿using log4net;
+using Reply.GeradorRelatorio.Repository;
 using Reply.GeradorRelatorio.Repository.Interfaces;
 using Reply.GeradorRelatorio.Service.Interfaces;
 using System;
@@ -16,6 +17,7 @@ namespace Reply.GeradorRelatorio.Service
         private static readonly string _NomeArquivo = string.Format("Relatorio_{0}.csv",
                 DateTime.Now.ToLongTimeString().Replace(":", "-"));
 
+        private static readonly ILog log = LogManager.GetLogger("Service de relatórios");
         private readonly IHistoricoService _historicoService;
         private readonly IRelatorioRepository _relatorioRepository;
         private readonly IConfiguracaoService _configuracaoService;
@@ -28,6 +30,8 @@ namespace Reply.GeradorRelatorio.Service
 
         public void GerarRelatorio()
         {
+            log.Info("Obtendo Dados de configuração");
+
             var dados = _configuracaoService.ObterDadosConfiguracao();
 
             DateTime dataValidacao = Convert.ToDateTime(dados.Data);
