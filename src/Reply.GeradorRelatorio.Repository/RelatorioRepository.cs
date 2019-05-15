@@ -10,12 +10,13 @@ namespace Reply.GeradorRelatorio.Repository
     public class RelatorioRepository : IRelatorioRepository
     {
         private readonly string _ConnectionString = ConfigurationManager.ConnectionStrings["BancoRelatorioConnectionString"].ConnectionString;
-
+        
         public IList<DataTable> ObterRelatorios(IList<string> queries)
         {
             List<DataTable> retorno = new List<DataTable>();
             using (SqlConnection connection = new SqlConnection(_ConnectionString))
             {
+                
                 connection.Open();
                 foreach (string query in queries)
                 {

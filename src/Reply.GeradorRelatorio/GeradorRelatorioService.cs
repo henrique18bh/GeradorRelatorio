@@ -2,6 +2,8 @@
 using System.ServiceProcess;
 using System.Timers;
 using System.Runtime.InteropServices;
+using System.Configuration;
+using System;
 
 namespace Reply.GeradorRelatorio
 {
@@ -54,9 +56,8 @@ namespace Reply.GeradorRelatorio
             SetServiceStatus(this.ServiceHandle, ref serviceStatus);
 
             eventLog1.WriteEntry("In OnStart.");
-
             Timer timer = new Timer();
-            timer.Interval = 60000; // 60 seconds
+            timer.Interval = Convert.ToDouble(ConfigurationManager.AppSettings["intervaloExecucao"]);
             timer.Elapsed += new ElapsedEventHandler(this.OnTimer);
             timer.Start();
 
