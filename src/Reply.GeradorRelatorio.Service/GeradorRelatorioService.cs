@@ -37,7 +37,7 @@ namespace Reply.GeradorRelatorio.Service
                 return;
             }
 
-            var queries = ObterQueries(dados.CaminhoTxt);
+            var queries = ObterQueries(dados.CaminhoTxt);  
 
             File.Delete(dados.CaminhoTxt);
 
