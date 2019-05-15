@@ -29,58 +29,65 @@ namespace Reply.GeradorRelatorio.Service
 
         public void GerarRelatorio()
         {
-            log.Info("Obtendo Dados de configuração");
-            Entity.DTO.DadosConfiguracaoDTO dados = _configuracaoService.ObterDadosConfiguracao();
-
-            if (dados == null)
+            try
             {
-                return;
-            }
-            DateTime dataValidacao = Convert.ToDateTime(dados.Data);
-            int diferencaData = DateTime.Compare(dataValidacao, DateTime.Now);
-            if (diferencaData >= 0)
-            {
-                log.Info("Fora do Horário de Execução.");
-                return;
-            }
+                log.Info("Obtendo Dados de configuração");
+                Entity.DTO.DadosConfiguracaoDTO dados = _configuracaoService.ObterDadosConfiguracao();
 
-            if (!Directory.Exists(dados.CaminhoResultado))
-            {
-                log.Error($"O caminho {dados.CaminhoResultado} informado no xml de configuração não é válido.");
-                return;
-            }
+                if (dados == null)
+                {
+                    return;
+                }
+                DateTime dataValidacao = Convert.ToDateTime(dados.Data);
+                int diferencaData = DateTime.Compare(dataValidacao, DateTime.Now);
+                if (diferencaData >= 0)
+                {
+                    log.Info("Fora do Horário de Execução.");
+                    return;
+                }
 
-            log.Info("Obtendo Consultas do Arquivo.");
-            List<string> queries = ObterQueries(dados.CaminhoTxt);
-            if (queries.Count == 0)
-            {
-                return;
-            }
+                if (!Directory.Exists(dados.CaminhoResultado))
+                {
+                    log.Error($"O caminho {dados.CaminhoResultado} informado no xml de configuração não é válido.");
+                    return;
+                }
 
-            log.Info("Obtendo Retorno Consulta SQL.");
-            IList<DataTable> consultas = _relatorioRepository.ObterRelatorios(queries);
+                log.Info("Obtendo Consultas do Arquivo.");
+                List<string> queries = ObterQueries(dados.CaminhoTxt);
+                if (queries.Count == 0)
+                {
+                    return;
+                }
 
-            for (int i = 0; i < consultas.Count; i++)
-            {
+                log.Info("Obtendo Retorno Consulta SQL.");
+                IList<DataTable> consultas = _relatorioRepository.ObterRelatorios(queries);
 
-                log.Info("Gravando Arquivo CSV.");
-                string nomeArquivo = GerarCsv(consultas[i], dados.CaminhoResultado);
-                try
+                for (int i = 0; i < consultas.Count; i++)
                 {
 
-                    log.Info("Gravando LOG da geração do relatório.");
-                    _historicoService.Salvar(nomeArquivo, queries[i]);
+                    log.Info("Gravando Arquivo CSV.");
+                    string nomeArquivo = GerarCsv(consultas[i], dados.CaminhoResultado);
+                    try
+                    {
 
+                        log.Info("Gravando LOG da geração do relatório.");
+                        _historicoService.Salvar(nomeArquivo, queries[i]);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error("Erro ao Salvar Log no Banco de Dados.", ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    log.Error("Erro ao Salvar Log no Banco de Dados.", ex);
-                }
+
+                log.Info("Deletando Arquivo Txt para não gerar novamente os relatórios");
+
+                File.Delete(dados.CaminhoTxt);
             }
-
-            log.Info("Deletando Arquivo Txt para não gerar novamente os relatórios");
-
-            File.Delete(dados.CaminhoTxt);
+            catch (Exception ex)
+            {
+                log.Error("Erro na geração do relatório", ex);
+            }
         }
 
         public List<string> ObterQueries(string caminhoArquivo)
